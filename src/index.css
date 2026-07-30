@@ -1,0 +1,51 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+:root {
+  --bg: #fbfaf8;
+  --surface: #ffffff;
+  --surface-2: #f3f1ec;
+  --border: #e4e0d8;
+  --text: #1c1a17;
+  --text-2: #6b675e;
+  --accent: #2f6f5e;
+  --accent-2: #1f4d40;
+  --warn: #b5762a;
+  --danger: #b3432f;
+  --ghost: #8a8578;
+}
+
+.dark {
+  --bg: #14120f;
+  --surface: #1c1a16;
+  --surface-2: #221f1a;
+  --border: #322e27;
+  --text: #f2efe8;
+  --text-2: #a8a296;
+  --accent: #5cc9a7;
+  --accent-2: #7fdcbe;
+  --warn: #e0a854;
+  --danger: #ea7a63;
+  --ghost: #6b6659;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+@keyframes riseIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-rise { animation: riseIn 0.35s ease both; }
