@@ -89,7 +89,7 @@ export default function App() {
   style={{ width: collapsed ? '76px' : '256px' }}
 />
 
-      <main className="flex-1 min-w-0 px-4 sm:px-6 lg:px-8 py-5 sm:py-6 max-w-[1400px]">
+      <main className="flex-1 min-w-0 px-4 sm:px-6 lg:px-8 py-5 sm:py-6">
         {page === 'dashboard' && (
           <DashboardPage
             applications={applications}
