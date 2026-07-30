@@ -8,15 +8,16 @@ interface Props {
   applications: JobApplication[];
   onExport: () => void;
   onImport: (file: File) => void;
+  onMenuClick?: () => void;
 }
 
-export function ProfilePage({ userEmail, applications, onExport, onImport }: Props) {
+export function ProfilePage({ userEmail, applications, onExport, onImport, onMenuClick }: Props) {
   const fileRef = useRef<HTMLInputElement>(null);
   const initial = (userEmail || 'U').charAt(0).toUpperCase();
 
   return (
     <div>
-      <PageHeader title="Profile" subtitle="Manage your account and data." userEmail={userEmail} />
+      <PageHeader title="Profile" subtitle="Manage your account and data." userEmail={userEmail} onMenuClick={onMenuClick} />
 
       <div className="rounded-xl border p-5 mb-5 flex items-center gap-4" style={{ background: 'var(--surface)', borderColor: 'var(--border)' }}>
         <div

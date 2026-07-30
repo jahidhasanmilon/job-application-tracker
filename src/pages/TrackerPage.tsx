@@ -7,14 +7,15 @@ interface Props {
   userEmail?: string | null;
   onAddWithStatus: (status: ApplicationStatus) => void;
   onEdit: (app: JobApplication) => void;
+  onMenuClick?: () => void;
 }
 
-export function TrackerPage({ applications, userEmail, onAddWithStatus, onEdit }: Props) {
+export function TrackerPage({ applications, userEmail, onAddWithStatus, onEdit, onMenuClick }: Props) {
   return (
     <div>
-      <PageHeader title="Tracker" subtitle="Track and organize your applications visually." userEmail={userEmail} />
+      <PageHeader title="Tracker" subtitle="Track and organize your applications visually." userEmail={userEmail} onMenuClick={onMenuClick} />
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4">
         {STATUS_LIST.map((status) => {
           const items = applications.filter((a) => a.status === status);
           return (

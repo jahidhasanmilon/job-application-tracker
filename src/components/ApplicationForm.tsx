@@ -66,7 +66,7 @@ export function ApplicationForm({ initial, defaultStatus, onClose, onSave }: Pro
           </button>
         </div>
 
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div className="col-span-2">
             <label className="text-xs font-medium mb-1 block" style={{ color: 'var(--text-2)' }}>Company *</label>
             <input required className={inputClass} style={inputStyle} value={company} onChange={(e) => setCompany(e.target.value)} placeholder="e.g. Delivery Hero" />

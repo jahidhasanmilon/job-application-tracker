@@ -8,9 +8,10 @@ interface Props {
   applications: JobApplication[];
   userEmail?: string | null;
   onAdd: () => void;
+  onMenuClick?: () => void;
 }
 
-export function DashboardPage({ applications, userEmail, onAdd }: Props) {
+export function DashboardPage({ applications, userEmail, onAdd, onMenuClick }: Props) {
   const total = applications.length;
   const interviews = applications.filter((a) => a.status === 'Interview').length;
   const offers = applications.filter((a) => a.status === 'Offer').length;
@@ -41,13 +42,14 @@ export function DashboardPage({ applications, userEmail, onAdd }: Props) {
         title="Dashboard"
         subtitle={`Welcome back${userEmail ? ', ' + userEmail.split('@')[0] : ''}! Here's your job search overview.`}
         userEmail={userEmail}
+        onMenuClick={onMenuClick}
         action={
           <button
             onClick={onAdd}
-            className="px-4 py-2 rounded-lg text-sm font-semibold"
+            className="px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold whitespace-nowrap"
             style={{ background: 'var(--accent)', color: 'var(--surface)' }}
           >
-            + Add Application
+            + Add
           </button>
         }
       />

@@ -11,9 +11,10 @@ interface Props {
   onAdd: () => void;
   onEdit: (app: JobApplication) => void;
   onDelete: (id: string) => void;
+  onMenuClick?: () => void;
 }
 
-export function ApplicationsPage({ applications, userEmail, onAdd, onEdit, onDelete }: Props) {
+export function ApplicationsPage({ applications, userEmail, onAdd, onEdit, onDelete, onMenuClick }: Props) {
   const [q, setQ] = useState('');
   const [statusFilter, setStatusFilter] = useState<ApplicationStatus | 'All'>('All');
 
@@ -33,13 +34,14 @@ export function ApplicationsPage({ applications, userEmail, onAdd, onEdit, onDel
         title="Applications"
         subtitle="Manage and track all your job applications."
         userEmail={userEmail}
+        onMenuClick={onMenuClick}
         action={
           <button
             onClick={onAdd}
-            className="px-4 py-2 rounded-lg text-sm font-semibold"
+            className="px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold whitespace-nowrap"
             style={{ background: 'var(--accent)', color: 'var(--surface)' }}
           >
-            + Add Application
+            + Add
           </button>
         }
       />

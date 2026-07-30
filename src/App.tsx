@@ -24,6 +24,8 @@ export default function App() {
   } = useApplications(user?.uid);
 
   const [page, setPage] = useState<PageKey>('dashboard');
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [collapsed, setCollapsed] = useState<boolean>(() => window.localStorage?.getItem('sidebar-collapsed') === 'true');
   const [formOpen, setFormOpen] = useState(false);
   const [editing, setEditing] = useState<JobApplication | null>(null);
   const [defaultStatus, setDefaultStatus] = useState<ApplicationStatus | undefined>(undefined);
@@ -65,11 +67,31 @@ export default function App() {
 
   return (
     <div className="flex" style={{ background: 'var(--bg)' }}>
-      <Sidebar active={page} onNavigate={setPage} dark={dark} onToggleTheme={toggle} onLogout={logout} />
+      <Sidebar
+        active={page}
+        onNavigate={setPage}
+        dark={dark}
+        onToggleTheme={toggle}
+        onLogout={logout}
+        open={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
+        collapsed={collapsed}
+        onToggleCollapse={() => {
+          setCollapsed((c) => {
+            window.localStorage?.setItem('sidebar-collapsed', String(!c));
+            return !c;
+          });
+        }}
+      />
 
-      <main className="flex-1 min-w-0 px-6 lg:px-8 py-6 max-w-[1400px]">
+      <main className="flex-1 min-w-0 px-4 sm:px-6 lg:px-8 py-5 sm:py-6 max-w-[1400px]">
         {page === 'dashboard' && (
-          <DashboardPage applications={applications} userEmail={user.email} onAdd={() => openAdd()} />
+          <DashboardPage
+            applications={applications}
+            userEmail={user.email}
+            onAdd={() => openAdd()}
+            onMenuClick={() => setSidebarOpen(true)}
+          />
         )}
         {page === 'applications' && (
           <ApplicationsPage
@@ -78,6 +100,7 @@ export default function App() {
             onAdd={() => openAdd()}
             onEdit={openEdit}
             onDelete={deleteApplication}
+            onMenuClick={() => setSidebarOpen(true)}
           />
         )}
         {page === 'tracker' && (
@@ -86,6 +109,7 @@ export default function App() {
             userEmail={user.email}
             onAddWithStatus={(status) => openAdd(status)}
             onEdit={openEdit}
+            onMenuClick={() => setSidebarOpen(true)}
           />
         )}
         {page === 'profile' && (
@@ -94,6 +118,7 @@ export default function App() {
             applications={applications}
             onExport={exportBackup}
             onImport={(file) => importBackup(file, user.uid)}
+            onMenuClick={() => setSidebarOpen(true)}
           />
         )}
       </main>
