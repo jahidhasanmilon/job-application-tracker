@@ -33,9 +33,9 @@ export function Sidebar({ active, onNavigate, dark, onToggleTheme, onLogout, ope
       )}
 
       <aside
-  className={`shrink-0 h-screen flex flex-col border-r py-5 fixed top-0 left-0 z-50 transition-all duration-200 lg:sticky lg:translate-x-0 ${
+  className={`shrink-0 h-screen flex flex-col border-r py-5 fixed top-0 left-0 z-50 transition-all duration-200 ${
     open ? 'translate-x-0' : '-translate-x-full'
-  }`}
+  } lg:translate-x-0`}
   style={{
     background: 'var(--sidebar-bg)',
     borderColor: 'var(--border)',

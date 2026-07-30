@@ -84,6 +84,11 @@ export default function App() {
         }}
       />
 
+<div
+  className="hidden lg:block shrink-0 transition-all duration-200"
+  style={{ width: collapsed ? '76px' : '256px' }}
+/>
+
       <main className="flex-1 min-w-0 px-4 sm:px-6 lg:px-8 py-5 sm:py-6 max-w-[1400px]">
         {page === 'dashboard' && (
           <DashboardPage
