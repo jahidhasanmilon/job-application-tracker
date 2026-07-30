@@ -1,9 +1,9 @@
 export type ApplicationStatus =
+  | 'Saved'
   | 'Applied'
   | 'Interview'
   | 'Offer'
-  | 'Rejected'
-  | 'Ghosted';
+  | 'Rejected';
 
 export interface JobApplication {
   id: string;
@@ -18,22 +18,37 @@ export interface JobApplication {
   salary?: string;
   contactPerson?: string;
   notes?: string;
+  priority?: 'Low' | 'Medium' | 'High';
   createdAt: number;
   updatedAt: number;
 }
 
 export const STATUS_LIST: ApplicationStatus[] = [
+  'Saved',
   'Applied',
   'Interview',
   'Offer',
   'Rejected',
-  'Ghosted',
 ];
 
 export const STATUS_COLOR: Record<ApplicationStatus, string> = {
-  Applied: '#2f6f5e',
-  Interview: '#b5762a',
-  Offer: '#2f6f5e',
-  Rejected: '#b3432f',
-  Ghosted: '#8a8578',
+  Saved: 'var(--text-2)',
+  Applied: 'var(--blue)',
+  Interview: 'var(--orange)',
+  Offer: 'var(--accent)',
+  Rejected: 'var(--red)',
+};
+
+export const STATUS_BG: Record<ApplicationStatus, string> = {
+  Saved: 'var(--surface-2)',
+  Applied: 'var(--blue-light)',
+  Interview: 'var(--orange-light)',
+  Offer: 'var(--accent-light)',
+  Rejected: 'var(--red-light)',
+};
+
+export const PRIORITY_COLOR: Record<string, string> = {
+  Low: 'var(--text-2)',
+  Medium: 'var(--orange)',
+  High: 'var(--red)',
 };

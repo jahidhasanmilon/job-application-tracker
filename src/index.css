@@ -1,37 +1,54 @@
 @import "tailwindcss";
 
 @theme {
-  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-display: 'Plus Jakarta Sans', system-ui, sans-serif;
   --font-body: 'Inter', system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
 }
 
 :root {
-  --bg: #fbfaf8;
+  --bg: #f6f8f6;
+  --sidebar-bg: #eef4ee;
   --surface: #ffffff;
-  --surface-2: #f3f1ec;
-  --border: #e4e0d8;
-  --text: #1c1a17;
-  --text-2: #6b675e;
-  --accent: #2f6f5e;
-  --accent-2: #1f4d40;
-  --warn: #b5762a;
-  --danger: #b3432f;
-  --ghost: #8a8578;
+  --surface-2: #f3f6f3;
+  --border: #e6ebe6;
+  --text: #14171a;
+  --text-2: #6b7280;
+  --ghost: #9aa39a;
+  --accent: #2f7d5c;
+  --accent-dark: #205c43;
+  --accent-light: #e4f3ea;
+  --blue: #3b82f6;
+  --blue-light: #eaf1ff;
+  --orange: #f59e0b;
+  --orange-light: #fef3e2;
+  --red: #ef4444;
+  --red-light: #fdecec;
+  --yellow: #eab308;
+  --yellow-light: #fdf6e3;
+  --shadow: 0 1px 2px rgba(20, 23, 26, 0.04), 0 8px 24px rgba(20, 23, 26, 0.04);
 }
 
 .dark {
-  --bg: #14120f;
-  --surface: #1c1a16;
-  --surface-2: #221f1a;
-  --border: #322e27;
-  --text: #f2efe8;
-  --text-2: #a8a296;
-  --accent: #5cc9a7;
-  --accent-2: #7fdcbe;
-  --warn: #e0a854;
-  --danger: #ea7a63;
-  --ghost: #6b6659;
+  --bg: #10130f;
+  --sidebar-bg: #151a13;
+  --surface: #1a1f18;
+  --surface-2: #20261d;
+  --border: #2a3226;
+  --text: #eef2ec;
+  --text-2: #9aa79a;
+  --ghost: #667066;
+  --accent: #4ea87e;
+  --accent-dark: #6fc39a;
+  --accent-light: #1c3428;
+  --blue: #6ea8fe;
+  --blue-light: #16233b;
+  --orange: #f0ac4f;
+  --orange-light: #382c15;
+  --red: #f0837a;
+  --red-light: #3a1f1c;
+  --yellow: #e8cd6a;
+  --yellow-light: #33301a;
+  --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.35);
 }
 
 body {
@@ -48,4 +65,4 @@ body {
   from { opacity: 0; transform: translateY(6px); }
   to { opacity: 1; transform: translateY(0); }
 }
-.animate-rise { animation: riseIn 0.35s ease both; }
+.animate-rise { animation: riseIn 0.3s ease both; }

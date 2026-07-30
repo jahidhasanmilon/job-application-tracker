@@ -5,21 +5,23 @@ import { STATUS_LIST } from '../types';
 
 interface Props {
   initial?: JobApplication | null;
+  defaultStatus?: ApplicationStatus;
   onClose: () => void;
   onSave: (data: Omit<JobApplication, 'id' | 'createdAt' | 'updatedAt'>) => void;
 }
 
-export function ApplicationForm({ initial, onClose, onSave }: Props) {
+export function ApplicationForm({ initial, defaultStatus, onClose, onSave }: Props) {
   const [company, setCompany] = useState(initial?.company ?? '');
   const [role, setRole] = useState(initial?.role ?? '');
   const [jobUrl, setJobUrl] = useState(initial?.jobUrl ?? '');
   const [location, setLocation] = useState(initial?.location ?? '');
   const [dateApplied, setDateApplied] = useState(initial?.dateApplied ?? new Date().toISOString().slice(0, 10));
-  const [status, setStatus] = useState<ApplicationStatus>(initial?.status ?? 'Applied');
+  const [status, setStatus] = useState<ApplicationStatus>(initial?.status ?? defaultStatus ?? 'Applied');
   const [followUpDate, setFollowUpDate] = useState(initial?.followUpDate ?? '');
   const [salary, setSalary] = useState(initial?.salary ?? '');
   const [contactPerson, setContactPerson] = useState(initial?.contactPerson ?? '');
   const [notes, setNotes] = useState(initial?.notes ?? '');
+  const [priority, setPriority] = useState<'Low' | 'Medium' | 'High'>(initial?.priority ?? 'Medium');
 
   function submit(e: React.FormEvent) {
     e.preventDefault();
@@ -36,6 +38,7 @@ export function ApplicationForm({ initial, onClose, onSave }: Props) {
       salary: salary.trim() || undefined,
       contactPerson: contactPerson.trim() || undefined,
       notes: notes.trim() || undefined,
+      priority,
     } as any);
   }
 
@@ -87,6 +90,14 @@ export function ApplicationForm({ initial, onClose, onSave }: Props) {
           <div>
             <label className="text-xs font-medium mb-1 block" style={{ color: 'var(--text-2)' }}>Location</label>
             <input className={inputClass} style={inputStyle} value={location} onChange={(e) => setLocation(e.target.value)} placeholder="Berlin, Remote..." />
+          </div>
+          <div>
+            <label className="text-xs font-medium mb-1 block" style={{ color: 'var(--text-2)' }}>Priority</label>
+            <select className={inputClass} style={inputStyle} value={priority} onChange={(e) => setPriority(e.target.value as any)}>
+              <option value="Low">Low</option>
+              <option value="Medium">Medium</option>
+              <option value="High">High</option>
+            </select>
           </div>
           <div>
             <label className="text-xs font-medium mb-1 block" style={{ color: 'var(--text-2)' }}>Follow-up date</label>

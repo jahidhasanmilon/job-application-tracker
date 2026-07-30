@@ -1,14 +1,12 @@
 import type { ApplicationStatus } from '../types';
-import { STATUS_COLOR } from '../types';
+import { STATUS_COLOR, STATUS_BG } from '../types';
 
 export function StatusBadge({ status }: { status: ApplicationStatus }) {
-  const color = STATUS_COLOR[status];
   return (
     <span
-      className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold"
-      style={{ backgroundColor: `${color}1a`, color }}
+      className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold whitespace-nowrap"
+      style={{ backgroundColor: STATUS_BG[status], color: STATUS_COLOR[status] }}
     >
-      <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: color }} />
       {status}
     </span>
   );
