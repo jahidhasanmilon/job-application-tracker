@@ -1,4 +1,5 @@
-import { LayoutDashboard, Briefcase, Kanban, User, Moon, Sun, LogOut, Sprout, X, ChevronsLeft, ChevronsRight } from 'lucide-react';
+import { LayoutDashboard, Briefcase, Kanban, User, Moon, Sun, LogOut, X, ChevronsLeft, ChevronsRight } from 'lucide-react';
+import { Logo } from './Logo';
 
 export type PageKey = 'dashboard' | 'applications' | 'tracker' | 'profile';
 
@@ -33,28 +34,23 @@ export function Sidebar({ active, onNavigate, dark, onToggleTheme, onLogout, ope
       )}
 
       <aside
-  className={`shrink-0 h-screen flex flex-col border-r py-5 fixed top-0 left-0 z-50 transition-all duration-200 ${
-    open ? 'translate-x-0' : '-translate-x-full'
-  } lg:translate-x-0`}
-  style={{
-    background: 'var(--sidebar-bg)',
-    borderColor: 'var(--border)',
-    width: collapsed ? '76px' : '256px',
-    paddingLeft: collapsed ? '10px' : '16px',
-    paddingRight: collapsed ? '10px' : '16px',
-  }}
->
+        className={`shrink-0 h-screen flex flex-col border-r py-5 fixed top-0 left-0 z-50 transition-all duration-200 ${
+          open ? 'translate-x-0' : '-translate-x-full'
+        } lg:translate-x-0`}
+        style={{
+          background: 'var(--sidebar-bg)',
+          borderColor: 'var(--border)',
+          width: collapsed ? '76px' : '256px',
+          paddingLeft: collapsed ? '10px' : '16px',
+          paddingRight: collapsed ? '10px' : '16px',
+        }}
+      >
         <div className={`flex items-center mb-1 ${collapsed ? 'flex-col gap-3' : 'justify-between px-1'}`}>
           <div className={`flex items-center gap-2.5 ${collapsed ? 'flex-col' : ''}`}>
-            <div
-              className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0"
-              style={{ background: 'var(--accent-light)', color: 'var(--accent)' }}
-            >
-              <Sprout size={18} strokeWidth={2.4} />
-            </div>
+            <Logo size={32} />
             {!collapsed && (
-              <span className="font-bold text-[15px]" style={{ fontFamily: 'var(--font-display)', color: 'var(--accent)' }}>
-                Job Trail
+              <span className="font-bold text-[16px]" style={{ fontFamily: 'var(--font-display)', color: 'var(--text)' }}>
+                Trackly
               </span>
             )}
           </div>
@@ -95,9 +91,8 @@ export function Sidebar({ active, onNavigate, dark, onToggleTheme, onLogout, ope
                   collapsed ? 'justify-center px-0 py-2.5' : 'gap-3 px-3 py-2.5 text-left'
                 }`}
                 style={{
-                  background: isActive ? 'var(--surface)' : 'transparent',
+                  background: isActive ? 'var(--accent-light)' : 'transparent',
                   color: isActive ? 'var(--accent)' : 'var(--text-2)',
-                  boxShadow: isActive ? 'var(--shadow)' : 'none',
                 }}
               >
                 <Icon size={17} strokeWidth={2} />
@@ -110,13 +105,10 @@ export function Sidebar({ active, onNavigate, dark, onToggleTheme, onLogout, ope
         {!collapsed && (
           <div
             className="rounded-xl p-4 mb-3 hidden sm:block"
-            style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}
+            style={{ background: 'var(--surface-2)', border: '1px solid var(--border)' }}
           >
-            <div
-              className="w-8 h-8 rounded-lg flex items-center justify-center mb-2"
-              style={{ background: 'var(--accent-light)', color: 'var(--accent)' }}
-            >
-              <Sprout size={16} />
+            <div className="mb-2">
+              <Logo size={28} />
             </div>
             <p className="text-xs font-semibold mb-0.5">Stay organized, stay ahead.</p>
             <p className="text-[11px] leading-relaxed" style={{ color: 'var(--text-2)' }}>

@@ -1,21 +1,17 @@
-import { Sprout, LayoutDashboard, Bookmark, Bell, TrendingUp } from 'lucide-react';
+import { LayoutDashboard, Bookmark, Bell, TrendingUp } from 'lucide-react';
+import { Logo } from './Logo';
 
 export function LoginScreen({ onLogin }: { onLogin: () => void }) {
   return (
     <div className="min-h-screen flex" style={{ background: 'var(--bg)' }}>
       <div
-        className="hidden lg:flex w-[46%] flex-col justify-between p-12 relative overflow-hidden"
-        style={{ background: 'var(--sidebar-bg)' }}
+        className="hidden lg:flex w-[46%] flex-col justify-between p-12 relative overflow-hidden border-r"
+        style={{ background: 'var(--surface)', borderColor: 'var(--border)' }}
       >
         <div className="flex items-center gap-2.5">
-          <div
-            className="w-9 h-9 rounded-xl flex items-center justify-center"
-            style={{ background: 'var(--accent-light)', color: 'var(--accent)' }}
-          >
-            <Sprout size={19} strokeWidth={2.4} />
-          </div>
-          <span className="font-bold text-lg" style={{ fontFamily: 'var(--font-display)', color: 'var(--accent)' }}>
-            Job Trail
+          <Logo size={34} />
+          <span className="font-bold text-lg" style={{ fontFamily: 'var(--font-display)', color: 'var(--text)' }}>
+            Trackly
           </span>
         </div>
 
@@ -30,7 +26,7 @@ export function LoginScreen({ onLogin }: { onLogin: () => void }) {
 
         <div
           className="rounded-2xl p-5 border animate-rise"
-          style={{ background: 'var(--surface)', borderColor: 'var(--border)' }}
+          style={{ background: 'var(--surface-2)', borderColor: 'var(--border)' }}
         >
           <div className="grid grid-cols-3 gap-3 mb-4">
             {[
@@ -41,7 +37,7 @@ export function LoginScreen({ onLogin }: { onLogin: () => void }) {
               <div key={s.label}>
                 <div
                   className="w-7 h-7 rounded-lg flex items-center justify-center mb-2"
-                  style={{ background: 'var(--surface-2)', color: s.color }}
+                  style={{ background: 'var(--surface)', color: s.color }}
                 >
                   <s.icon size={13} />
                 </div>
@@ -60,14 +56,9 @@ export function LoginScreen({ onLogin }: { onLogin: () => void }) {
       <div className="flex-1 flex items-center justify-center px-6 py-16">
         <div className="max-w-sm w-full text-center animate-rise">
           <div className="lg:hidden flex items-center justify-center gap-2.5 mb-8">
-            <div
-              className="w-9 h-9 rounded-xl flex items-center justify-center"
-              style={{ background: 'var(--accent-light)', color: 'var(--accent)' }}
-            >
-              <Sprout size={19} strokeWidth={2.4} />
-            </div>
-            <span className="font-bold text-lg" style={{ fontFamily: 'var(--font-display)', color: 'var(--accent)' }}>
-              Job Trail
+            <Logo size={34} />
+            <span className="font-bold text-lg" style={{ fontFamily: 'var(--font-display)', color: 'var(--text)' }}>
+              Trackly
             </span>
           </div>
 
@@ -80,7 +71,7 @@ export function LoginScreen({ onLogin }: { onLogin: () => void }) {
 
           <button
             onClick={onLogin}
-            className="w-full flex items-center justify-center gap-2 py-3 rounded-xl font-semibold text-sm border transition-transform hover:scale-[1.01] active:scale-[0.99]"
+            className="w-full flex items-center justify-center gap-2 py-3 rounded-full font-semibold text-sm border transition-transform hover:scale-[1.01] active:scale-[0.99]"
             style={{ borderColor: 'var(--border)', background: 'var(--surface)', color: 'var(--text)' }}
           >
             <svg width="16" height="16" viewBox="0 0 24 24">

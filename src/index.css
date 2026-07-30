@@ -6,48 +6,48 @@
 }
 
 :root {
-  --bg: #f6f8f6;
-  --sidebar-bg: #eef4ee;
+  --bg: #f4f2ee;
+  --sidebar-bg: #ffffff;
   --surface: #ffffff;
-  --surface-2: #f3f6f3;
-  --border: #e6ebe6;
-  --text: #14171a;
-  --text-2: #6b7280;
-  --ghost: #9aa39a;
-  --accent: #2f7d5c;
-  --accent-dark: #205c43;
-  --accent-light: #e4f3ea;
-  --blue: #3b82f6;
-  --blue-light: #eaf1ff;
-  --orange: #f59e0b;
-  --orange-light: #fef3e2;
-  --red: #ef4444;
-  --red-light: #fdecec;
-  --yellow: #eab308;
-  --yellow-light: #fdf6e3;
-  --shadow: 0 1px 2px rgba(20, 23, 26, 0.04), 0 8px 24px rgba(20, 23, 26, 0.04);
+  --surface-2: #f3f2ef;
+  --border: #e0dfdc;
+  --text: #191919;
+  --text-2: #666666;
+  --ghost: #8f8f8f;
+  --accent: #0a66c2;
+  --accent-dark: #004182;
+  --accent-light: #e8f3ff;
+  --blue: #0a66c2;
+  --blue-light: #e8f3ff;
+  --orange: #b8720a;
+  --orange-light: #fdf1de;
+  --red: #b8392b;
+  --red-light: #fbe9e7;
+  --yellow: #915907;
+  --yellow-light: #fdf2d9;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.06), 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .dark {
-  --bg: #10130f;
-  --sidebar-bg: #151a13;
-  --surface: #1a1f18;
-  --surface-2: #20261d;
-  --border: #2a3226;
-  --text: #eef2ec;
-  --text-2: #9aa79a;
-  --ghost: #667066;
-  --accent: #4ea87e;
-  --accent-dark: #6fc39a;
-  --accent-light: #1c3428;
-  --blue: #6ea8fe;
-  --blue-light: #16233b;
-  --orange: #f0ac4f;
-  --orange-light: #382c15;
-  --red: #f0837a;
-  --red-light: #3a1f1c;
-  --yellow: #e8cd6a;
-  --yellow-light: #33301a;
+  --bg: #1b1f23;
+  --sidebar-bg: #22272b;
+  --surface: #22272b;
+  --surface-2: #2a2f34;
+  --border: #383e43;
+  --text: #f5f5f5;
+  --text-2: #a5a5a5;
+  --ghost: #6e7378;
+  --accent: #4b9ce8;
+  --accent-dark: #6fb3ef;
+  --accent-light: #1e3a56;
+  --blue: #4b9ce8;
+  --blue-light: #1e3a56;
+  --orange: #e0ac5f;
+  --orange-light: #3c2f16;
+  --red: #e08074;
+  --red-light: #402320;
+  --yellow: #dcb85e;
+  --yellow-light: #3a3016;
   --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.35);
 }
 
