@@ -1,17 +1,18 @@
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
 import { FileText, Users, Award, TrendingUp, Bookmark, Bell } from 'lucide-react';
-import { PageHeader } from '../components/PageHeader';
+import { PageHeader, type HeaderUser } from '../components/PageHeader';
 import type { JobApplication } from '../types';
 import { STATUS_COLOR, STATUS_LIST } from '../types';
 
 interface Props {
   applications: JobApplication[];
-  userEmail?: string | null;
+  user?: HeaderUser | null;
   onAdd: () => void;
   onMenuClick?: () => void;
 }
 
-export function DashboardPage({ applications, userEmail, onAdd, onMenuClick }: Props) {
+export function DashboardPage({ applications, user, onAdd, onMenuClick }: Props) {
+  const firstName = user?.displayName?.split(' ')[0] || user?.email?.split('@')[0];
   const total = applications.length;
   const interviews = applications.filter((a) => a.status === 'Interview').length;
   const offers = applications.filter((a) => a.status === 'Offer').length;
@@ -40,8 +41,8 @@ export function DashboardPage({ applications, userEmail, onAdd, onMenuClick }: P
     <div>
       <PageHeader
         title="Dashboard"
-        subtitle={`Welcome back${userEmail ? ', ' + userEmail.split('@')[0] : ''}! Here's your job search overview.`}
-        userEmail={userEmail}
+        subtitle={`Welcome back${firstName ? ', ' + firstName : ''}! Here's your job search overview.`}
+        user={user}
         onMenuClick={onMenuClick}
         action={
           <button

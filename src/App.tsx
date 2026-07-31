@@ -93,7 +93,7 @@ export default function App() {
         {page === 'dashboard' && (
           <DashboardPage
             applications={applications}
-            userEmail={user.email}
+            user={user}
             onAdd={() => openAdd()}
             onMenuClick={() => setSidebarOpen(true)}
           />
@@ -101,7 +101,7 @@ export default function App() {
         {page === 'applications' && (
           <ApplicationsPage
             applications={applications}
-            userEmail={user.email}
+            user={user}
             onAdd={() => openAdd()}
             onEdit={openEdit}
             onDelete={deleteApplication}
@@ -111,7 +111,7 @@ export default function App() {
         {page === 'tracker' && (
           <TrackerPage
             applications={applications}
-            userEmail={user.email}
+            user={user}
             onAddWithStatus={(status) => openAdd(status)}
             onEdit={openEdit}
             onMenuClick={() => setSidebarOpen(true)}
@@ -119,7 +119,7 @@ export default function App() {
         )}
         {page === 'profile' && (
           <ProfilePage
-            userEmail={user.email}
+            user={user}
             applications={applications}
             onExport={exportBackup}
             onImport={(file) => importBackup(file, user.uid)}

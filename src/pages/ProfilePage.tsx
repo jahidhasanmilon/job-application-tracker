@@ -1,34 +1,79 @@
-import { PageHeader } from '../components/PageHeader';
+import { PageHeader, type HeaderUser } from '../components/PageHeader';
 import type { JobApplication } from '../types';
-import { Download, Upload, Trash2 } from 'lucide-react';
+import { Download, Upload, Trash2, Mail, Calendar, Clock, ShieldCheck } from 'lucide-react';
 import { useRef } from 'react';
 
+interface ProfileUser extends HeaderUser {
+  metadata?: { creationTime?: string; lastSignInTime?: string };
+}
+
 interface Props {
-  userEmail?: string | null;
+  user?: ProfileUser | null;
   applications: JobApplication[];
   onExport: () => void;
   onImport: (file: File) => void;
   onMenuClick?: () => void;
 }
 
-export function ProfilePage({ userEmail, applications, onExport, onImport, onMenuClick }: Props) {
+function formatDate(value?: string) {
+  if (!value) return '—';
+  return new Date(value).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
+}
+
+export function ProfilePage({ user, applications, onExport, onImport, onMenuClick }: Props) {
   const fileRef = useRef<HTMLInputElement>(null);
-  const initial = (userEmail || 'U').charAt(0).toUpperCase();
+  const initial = (user?.displayName || user?.email || 'U').charAt(0).toUpperCase();
+
+  const details = [
+    { label: 'Email', value: user?.email || '—', icon: Mail },
+    { label: 'Signed in with', value: 'Google', icon: ShieldCheck },
+    { label: 'Member since', value: formatDate(user?.metadata?.creationTime), icon: Calendar },
+    { label: 'Last sign-in', value: formatDate(user?.metadata?.lastSignInTime), icon: Clock },
+  ];
 
   return (
     <div>
-      <PageHeader title="Profile" subtitle="Manage your account and data." userEmail={userEmail} onMenuClick={onMenuClick} />
+      <PageHeader title="Profile" subtitle="Manage your account and data." user={user} onMenuClick={onMenuClick} />
 
-      <div className="rounded-xl border p-5 mb-5 flex items-center gap-4" style={{ background: 'var(--surface)', borderColor: 'var(--border)' }}>
-        <div
-          className="w-14 h-14 rounded-full flex items-center justify-center text-xl font-bold shrink-0"
-          style={{ background: 'var(--accent)', color: 'var(--surface)' }}
-        >
-          {initial}
+      <div className="rounded-xl border p-5 mb-5" style={{ background: 'var(--surface)', borderColor: 'var(--border)' }}>
+        <div className="flex items-center gap-4 mb-5">
+          {user?.photoURL ? (
+            <img
+              src={user.photoURL}
+              alt={user.displayName || 'User'}
+              referrerPolicy="no-referrer"
+              className="w-14 h-14 rounded-full object-cover shrink-0"
+              style={{ border: '1px solid var(--border)' }}
+            />
+          ) : (
+            <div
+              className="w-14 h-14 rounded-full flex items-center justify-center text-xl font-bold shrink-0"
+              style={{ background: 'var(--accent)', color: 'var(--surface)' }}
+            >
+              {initial}
+            </div>
+          )}
+          <div>
+            <p className="font-semibold">{user?.displayName || 'Unnamed user'}</p>
+            <p className="text-xs" style={{ color: 'var(--text-2)' }}>{user?.email}</p>
+          </div>
         </div>
-        <div>
-          <p className="font-semibold">{userEmail}</p>
-          <p className="text-xs" style={{ color: 'var(--text-2)' }}>Signed in with Google</p>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-4 border-t" style={{ borderColor: 'var(--border)' }}>
+          {details.map((d) => (
+            <div key={d.label} className="flex items-center gap-2.5">
+              <div
+                className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0"
+                style={{ background: 'var(--surface-2)', color: 'var(--text-2)' }}
+              >
+                <d.icon size={14} />
+              </div>
+              <div className="min-w-0">
+                <p className="text-[11px]" style={{ color: 'var(--text-2)' }}>{d.label}</p>
+                <p className="text-sm font-medium truncate">{d.value}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
 

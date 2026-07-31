@@ -1,16 +1,22 @@
 import { Bell, Menu } from 'lucide-react';
 import type { ReactNode } from 'react';
 
+export interface HeaderUser {
+  displayName?: string | null;
+  email?: string | null;
+  photoURL?: string | null;
+}
+
 interface Props {
   title: string;
   subtitle: string;
-  userEmail?: string | null;
+  user?: HeaderUser | null;
   action?: ReactNode;
   onMenuClick?: () => void;
 }
 
-export function PageHeader({ title, subtitle, userEmail, action, onMenuClick }: Props) {
-  const initial = (userEmail || 'U').charAt(0).toUpperCase();
+export function PageHeader({ title, subtitle, user, action, onMenuClick }: Props) {
+  const initial = (user?.displayName || user?.email || 'U').charAt(0).toUpperCase();
   return (
     <div className="flex items-start justify-between mb-6 gap-3 flex-wrap">
       <div className="flex items-start gap-3 min-w-0">
@@ -36,12 +42,22 @@ export function PageHeader({ title, subtitle, userEmail, action, onMenuClick }: 
         >
           <Bell size={16} />
         </button>
-        <div
-          className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold shrink-0"
-          style={{ background: 'var(--accent)', color: 'var(--surface)' }}
-        >
-          {initial}
-        </div>
+        {user?.photoURL ? (
+          <img
+            src={user.photoURL}
+            alt={user.displayName || 'User'}
+            referrerPolicy="no-referrer"
+            className="w-9 h-9 rounded-full object-cover shrink-0"
+            style={{ border: '1px solid var(--border)' }}
+          />
+        ) : (
+          <div
+            className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold shrink-0"
+            style={{ background: 'var(--accent)', color: 'var(--surface)' }}
+          >
+            {initial}
+          </div>
+        )}
       </div>
     </div>
   );
