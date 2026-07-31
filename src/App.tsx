@@ -27,6 +27,7 @@ export default function App() {
   const { notifications, unreadCount, markAsRead, markAllAsRead } = useNotifications(user?.uid, user, applications);
 
   const [page, setPage] = useState<PageKey>('dashboard');
+  const [prevPage, setPrevPage] = useState<PageKey>('dashboard');
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [collapsed, setCollapsed] = useState<boolean>(() => window.localStorage?.getItem('sidebar-collapsed') === 'true');
   const [formOpen, setFormOpen] = useState(false);
@@ -44,6 +45,19 @@ export default function App() {
 
   if (!user) {
     return <LoginScreen onLogin={login} />;
+  }
+
+  function navigate(next: PageKey) {
+    setPrevPage(page);
+    setPage(next);
+  }
+
+  function handleAvatarClick() {
+    if (page === 'profile') {
+      navigate(prevPage);
+    } else {
+      navigate('profile');
+    }
   }
 
   function openAdd(status?: ApplicationStatus) {
@@ -73,7 +87,7 @@ export default function App() {
     <div className="flex" style={{ background: 'var(--bg)' }}>
       <Sidebar
         active={page}
-        onNavigate={setPage}
+        onNavigate={navigate}
         dark={dark}
         onToggleTheme={toggle}
         onLogout={logout}
@@ -102,7 +116,7 @@ export default function App() {
             onMenuClick={() => setSidebarOpen(true)}
             unreadCount={unreadCount}
             onBellClick={() => setNotifOpen(true)}
-            onAvatarClick={() => setPage('profile')}
+            onAvatarClick={handleAvatarClick}
           />
         )}
         {page === 'applications' && (
@@ -115,7 +129,7 @@ export default function App() {
             onMenuClick={() => setSidebarOpen(true)}
             unreadCount={unreadCount}
             onBellClick={() => setNotifOpen(true)}
-            onAvatarClick={() => setPage('profile')}
+            onAvatarClick={handleAvatarClick}
           />
         )}
         {page === 'tracker' && (
@@ -127,7 +141,7 @@ export default function App() {
             onMenuClick={() => setSidebarOpen(true)}
             unreadCount={unreadCount}
             onBellClick={() => setNotifOpen(true)}
-            onAvatarClick={() => setPage('profile')}
+            onAvatarClick={handleAvatarClick}
           />
         )}
         {page === 'profile' && (
@@ -139,6 +153,7 @@ export default function App() {
             onMenuClick={() => setSidebarOpen(true)}
             unreadCount={unreadCount}
             onBellClick={() => setNotifOpen(true)}
+            onAvatarClick={handleAvatarClick}
           />
         )}
       </main>
