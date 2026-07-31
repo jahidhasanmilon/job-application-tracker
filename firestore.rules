@@ -8,5 +8,13 @@ service cloud.firestore {
       allow create: if request.auth != null
         && request.resource.data.ownerId == request.auth.uid;
     }
+
+    // Each user can only read/write their own notifications
+    match /notifications/{notifId} {
+      allow read, update: if request.auth != null
+        && resource.data.ownerId == request.auth.uid;
+      allow create: if request.auth != null
+        && request.resource.data.ownerId == request.auth.uid;
+    }
   }
 }

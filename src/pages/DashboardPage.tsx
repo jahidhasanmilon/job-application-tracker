@@ -1,17 +1,17 @@
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
 import { FileText, Users, Award, TrendingUp, Bookmark, Bell } from 'lucide-react';
-import { PageHeader, type HeaderUser } from '../components/PageHeader';
+import { PageHeader, type HeaderUser, type HeaderActions } from '../components/PageHeader';
 import type { JobApplication } from '../types';
 import { STATUS_COLOR, STATUS_LIST } from '../types';
 
-interface Props {
+interface Props extends HeaderActions {
   applications: JobApplication[];
   user?: HeaderUser | null;
   onAdd: () => void;
   onMenuClick?: () => void;
 }
 
-export function DashboardPage({ applications, user, onAdd, onMenuClick }: Props) {
+export function DashboardPage({ applications, user, onAdd, onMenuClick, unreadCount, onBellClick, onAvatarClick }: Props) {
   const firstName = user?.displayName?.split(' ')[0] || user?.email?.split('@')[0];
   const total = applications.length;
   const interviews = applications.filter((a) => a.status === 'Interview').length;
@@ -44,6 +44,9 @@ export function DashboardPage({ applications, user, onAdd, onMenuClick }: Props)
         subtitle={`Welcome back${firstName ? ', ' + firstName : ''}! Here's your job search overview.`}
         user={user}
         onMenuClick={onMenuClick}
+        unreadCount={unreadCount}
+        onBellClick={onBellClick}
+        onAvatarClick={onAvatarClick}
         action={
           <button
             onClick={onAdd}

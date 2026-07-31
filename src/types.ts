@@ -52,3 +52,17 @@ export const PRIORITY_COLOR: Record<string, string> = {
   Medium: 'var(--orange)',
   High: 'var(--red)',
 };
+
+export type NotificationType = 'welcome' | 'followup';
+
+export interface AppNotification {
+  id: string;
+  ownerId: string;
+  type: NotificationType;
+  title: string;
+  message: string;
+  read: boolean;
+  createdAt: number;
+  refId?: string;
+  refDate?: string;
+}

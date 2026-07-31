@@ -1,8 +1,8 @@
-import { PageHeader, type HeaderUser } from '../components/PageHeader';
+import { PageHeader, type HeaderUser, type HeaderActions } from '../components/PageHeader';
 import type { JobApplication, ApplicationStatus } from '../types';
 import { STATUS_LIST, STATUS_COLOR, PRIORITY_COLOR } from '../types';
 
-interface Props {
+interface Props extends HeaderActions {
   applications: JobApplication[];
   user?: HeaderUser | null;
   onAddWithStatus: (status: ApplicationStatus) => void;
@@ -10,10 +10,18 @@ interface Props {
   onMenuClick?: () => void;
 }
 
-export function TrackerPage({ applications, user, onAddWithStatus, onEdit, onMenuClick }: Props) {
+export function TrackerPage({ applications, user, onAddWithStatus, onEdit, onMenuClick, unreadCount, onBellClick, onAvatarClick }: Props) {
   return (
     <div>
-      <PageHeader title="Tracker" subtitle="Track and organize your applications visually." user={user} onMenuClick={onMenuClick} />
+      <PageHeader
+        title="Tracker"
+        subtitle="Track and organize your applications visually."
+        user={user}
+        onMenuClick={onMenuClick}
+        unreadCount={unreadCount}
+        onBellClick={onBellClick}
+        onAvatarClick={onAvatarClick}
+      />
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4">
         {STATUS_LIST.map((status) => {

@@ -1,11 +1,11 @@
 import { useMemo, useState } from 'react';
 import { Search, Pencil, Trash2, ExternalLink } from 'lucide-react';
-import { PageHeader, type HeaderUser } from '../components/PageHeader';
+import { PageHeader, type HeaderUser, type HeaderActions } from '../components/PageHeader';
 import { StatusBadge } from '../components/StatusBadge';
 import type { JobApplication, ApplicationStatus } from '../types';
 import { STATUS_LIST, PRIORITY_COLOR } from '../types';
 
-interface Props {
+interface Props extends HeaderActions {
   applications: JobApplication[];
   user?: HeaderUser | null;
   onAdd: () => void;
@@ -14,7 +14,7 @@ interface Props {
   onMenuClick?: () => void;
 }
 
-export function ApplicationsPage({ applications, user, onAdd, onEdit, onDelete, onMenuClick }: Props) {
+export function ApplicationsPage({ applications, user, onAdd, onEdit, onDelete, onMenuClick, unreadCount, onBellClick, onAvatarClick }: Props) {
   const [q, setQ] = useState('');
   const [statusFilter, setStatusFilter] = useState<ApplicationStatus | 'All'>('All');
 
@@ -35,6 +35,9 @@ export function ApplicationsPage({ applications, user, onAdd, onEdit, onDelete, 
         subtitle="Manage and track all your job applications."
         user={user}
         onMenuClick={onMenuClick}
+        unreadCount={unreadCount}
+        onBellClick={onBellClick}
+        onAvatarClick={onAvatarClick}
         action={
           <button
             onClick={onAdd}

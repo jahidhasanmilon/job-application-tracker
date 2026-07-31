@@ -7,7 +7,13 @@ export interface HeaderUser {
   photoURL?: string | null;
 }
 
-interface Props {
+export interface HeaderActions {
+  unreadCount?: number;
+  onBellClick?: () => void;
+  onAvatarClick?: () => void;
+}
+
+interface Props extends HeaderActions {
   title: string;
   subtitle: string;
   user?: HeaderUser | null;
@@ -15,7 +21,7 @@ interface Props {
   onMenuClick?: () => void;
 }
 
-export function PageHeader({ title, subtitle, user, action, onMenuClick }: Props) {
+export function PageHeader({ title, subtitle, user, action, onMenuClick, unreadCount = 0, onBellClick, onAvatarClick }: Props) {
   const initial = (user?.displayName || user?.email || 'U').charAt(0).toUpperCase();
   return (
     <div className="flex items-start justify-between mb-6 gap-3 flex-wrap">
@@ -37,27 +43,38 @@ export function PageHeader({ title, subtitle, user, action, onMenuClick }: Props
       <div className="flex items-center gap-2 sm:gap-3">
         {action}
         <button
-          className="p-2 rounded-lg border hidden sm:block"
+          onClick={onBellClick}
+          className="relative p-2 rounded-lg border"
           style={{ borderColor: 'var(--border)', color: 'var(--text-2)', background: 'var(--surface)' }}
         >
           <Bell size={16} />
+          {unreadCount > 0 && (
+            <span
+              className="absolute -top-1.5 -right-1.5 min-w-[18px] h-[18px] px-1 rounded-full flex items-center justify-center text-[10px] font-bold"
+              style={{ background: 'var(--red)', color: '#fff' }}
+            >
+              {unreadCount > 9 ? '9+' : unreadCount}
+            </span>
+          )}
         </button>
-        {user?.photoURL ? (
-          <img
-            src={user.photoURL}
-            alt={user.displayName || 'User'}
-            referrerPolicy="no-referrer"
-            className="w-9 h-9 rounded-full object-cover shrink-0"
-            style={{ border: '1px solid var(--border)' }}
-          />
-        ) : (
-          <div
-            className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold shrink-0"
-            style={{ background: 'var(--accent)', color: 'var(--surface)' }}
-          >
-            {initial}
-          </div>
-        )}
+        <button onClick={onAvatarClick} className="shrink-0" title="Profile">
+          {user?.photoURL ? (
+            <img
+              src={user.photoURL}
+              alt={user.displayName || 'User'}
+              referrerPolicy="no-referrer"
+              className="w-9 h-9 rounded-full object-cover"
+              style={{ border: '1px solid var(--border)' }}
+            />
+          ) : (
+            <div
+              className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold"
+              style={{ background: 'var(--accent)', color: 'var(--surface)' }}
+            >
+              {initial}
+            </div>
+          )}
+        </button>
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import { PageHeader, type HeaderUser } from '../components/PageHeader';
+import { PageHeader, type HeaderUser, type HeaderActions } from '../components/PageHeader';
 import type { JobApplication } from '../types';
 import { Download, Upload, Trash2, Mail, Calendar, Clock, ShieldCheck } from 'lucide-react';
 import { useRef } from 'react';
@@ -7,7 +7,7 @@ interface ProfileUser extends HeaderUser {
   metadata?: { creationTime?: string; lastSignInTime?: string };
 }
 
-interface Props {
+interface Props extends HeaderActions {
   user?: ProfileUser | null;
   applications: JobApplication[];
   onExport: () => void;
@@ -20,7 +20,7 @@ function formatDate(value?: string) {
   return new Date(value).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
 }
 
-export function ProfilePage({ user, applications, onExport, onImport, onMenuClick }: Props) {
+export function ProfilePage({ user, applications, onExport, onImport, onMenuClick, unreadCount, onBellClick, onAvatarClick }: Props) {
   const fileRef = useRef<HTMLInputElement>(null);
   const initial = (user?.displayName || user?.email || 'U').charAt(0).toUpperCase();
 
@@ -33,7 +33,15 @@ export function ProfilePage({ user, applications, onExport, onImport, onMenuClic
 
   return (
     <div>
-      <PageHeader title="Profile" subtitle="Manage your account and data." user={user} onMenuClick={onMenuClick} />
+      <PageHeader
+        title="Profile"
+        subtitle="Manage your account and data."
+        user={user}
+        onMenuClick={onMenuClick}
+        unreadCount={unreadCount}
+        onBellClick={onBellClick}
+        onAvatarClick={onAvatarClick}
+      />
 
       <div className="rounded-xl border p-5 mb-5" style={{ background: 'var(--surface)', borderColor: 'var(--border)' }}>
         <div className="flex items-center gap-4 mb-5">

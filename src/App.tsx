@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { useAuth } from './hooks/useAuth';
 import { useApplications } from './hooks/useApplications';
+import { useNotifications } from './hooks/useNotifications';
 import { useTheme } from './hooks/useTheme';
 import { LoginScreen } from './components/LoginScreen';
 import { Sidebar, type PageKey } from './components/Sidebar';
 import { ApplicationForm } from './components/ApplicationForm';
+import { NotificationPanel } from './components/NotificationPanel';
 import { DashboardPage } from './pages/DashboardPage';
 import { ApplicationsPage } from './pages/ApplicationsPage';
 import { TrackerPage } from './pages/TrackerPage';
@@ -22,6 +24,7 @@ export default function App() {
     exportBackup,
     importBackup,
   } = useApplications(user?.uid);
+  const { notifications, unreadCount, markAsRead, markAllAsRead } = useNotifications(user?.uid, user, applications);
 
   const [page, setPage] = useState<PageKey>('dashboard');
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -29,6 +32,7 @@ export default function App() {
   const [formOpen, setFormOpen] = useState(false);
   const [editing, setEditing] = useState<JobApplication | null>(null);
   const [defaultStatus, setDefaultStatus] = useState<ApplicationStatus | undefined>(undefined);
+  const [notifOpen, setNotifOpen] = useState(false);
 
   if (authLoading) {
     return (
@@ -96,6 +100,9 @@ export default function App() {
             user={user}
             onAdd={() => openAdd()}
             onMenuClick={() => setSidebarOpen(true)}
+            unreadCount={unreadCount}
+            onBellClick={() => setNotifOpen(true)}
+            onAvatarClick={() => setPage('profile')}
           />
         )}
         {page === 'applications' && (
@@ -106,6 +113,9 @@ export default function App() {
             onEdit={openEdit}
             onDelete={deleteApplication}
             onMenuClick={() => setSidebarOpen(true)}
+            unreadCount={unreadCount}
+            onBellClick={() => setNotifOpen(true)}
+            onAvatarClick={() => setPage('profile')}
           />
         )}
         {page === 'tracker' && (
@@ -115,6 +125,9 @@ export default function App() {
             onAddWithStatus={(status) => openAdd(status)}
             onEdit={openEdit}
             onMenuClick={() => setSidebarOpen(true)}
+            unreadCount={unreadCount}
+            onBellClick={() => setNotifOpen(true)}
+            onAvatarClick={() => setPage('profile')}
           />
         )}
         {page === 'profile' && (
@@ -124,9 +137,19 @@ export default function App() {
             onExport={exportBackup}
             onImport={(file) => importBackup(file, user.uid)}
             onMenuClick={() => setSidebarOpen(true)}
+            unreadCount={unreadCount}
+            onBellClick={() => setNotifOpen(true)}
           />
         )}
       </main>
+
+      <NotificationPanel
+        open={notifOpen}
+        onClose={() => setNotifOpen(false)}
+        notifications={notifications}
+        onMarkRead={markAsRead}
+        onMarkAllRead={markAllAsRead}
+      />
 
       {formOpen && (
         <ApplicationForm
